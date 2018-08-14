@@ -15,7 +15,7 @@
 
 ## 运行
 
-下载[最新版](https://github.com/546669204/RebateBot/releases)
+下载[最新版](https://github.com/546669204/wechatbot-xposed/releases)
 并安装对应版本微信
 
 ## 开发和构建
@@ -26,7 +26,7 @@
 - android 模拟器或真机
 
 ```
-git clone https://github.com/546669204/RebateBot.git
+git clone https://github.com/546669204/wechatbot-xposed.git
 use Android-Studio open
 ```
 
