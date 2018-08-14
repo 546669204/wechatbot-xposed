@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="#000"
+    >
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="撒旦王群二撒旦王群二撒旦王二撒旦王群二撒旦王群二撒旦王群二撒旦王群二撒旦王群二撒旦王群二撒旦王群二撒旦王群二撒旦王群二撒旦王群二撒旦王群\n二撒旦王群二撒旦王群二撒旦王群二撒旦王群二撒旦王群二 "
+        android:textColor="#fff"/>
+</LinearLayout>
