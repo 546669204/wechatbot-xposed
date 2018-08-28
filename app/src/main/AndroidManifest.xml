@@ -8,12 +8,8 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
-    <!-- 在SD卡中创建与删除文件权限 -->
-    <!-- 向SD卡写入数据权限 -->
     <uses-permission android:name="android.permission.REORDER_TASKS"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application

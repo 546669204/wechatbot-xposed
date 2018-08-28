@@ -1,15 +1,12 @@
 package com.example.administrator.webot;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.JSONWriter;
 
 import net.sqlcipher.Cursor;
 import net.sqlcipher.database.SQLiteDatabase;
@@ -18,7 +15,6 @@ import net.sqlcipher.database.SQLiteDatabaseHook;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.jsoup.helper.StringUtil;
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -28,11 +24,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 
 public class openSQLite {
@@ -47,6 +40,7 @@ public class openSQLite {
         execRootCmd("chmod -R 777 " + WX_ROOT_PATH);
         //execRootCmd("chmod 777 -R " + WX_SP_UIN_PATH);
         ArrayList<String> imei = getWholeImei();
+
         initCurrWxUin();
         copyFile(WX_ROOT_PATH + "MicroMsg/" + md5("mm" + mCurrWxUin) + "/EnMicroMsg.db",mCurrApkPath + COPY_WX_DATA_DB);
         Iterator it = imei.iterator();        //根据传入的集合(旧集合)获取迭代器
@@ -55,6 +49,9 @@ public class openSQLite {
             initDbPassword((String)obj,mCurrWxUin);
             String tmp = "";
             String username  = "";
+            Log.e("beta:", obj + "-----" + mCurrWxUin);
+            Log.e("beta:", mCurrApkPath + COPY_WX_DATA_DB);
+
             try {
                 tmp  = openWxDb(new File(mCurrApkPath+COPY_WX_DATA_DB));
                 username = getUserName(new File(mCurrApkPath+COPY_WX_DATA_DB));
@@ -234,6 +231,10 @@ public class openSQLite {
 
             //打开数据库连接
             SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dbFile, mDbPassword, null, hook);
+        if (db == null) {
+            Log.e("db", db.toString());
+            throw new Exception("a");
+        }
             //查询所有联系人（verifyFlag!=0:公众号等类型，群里面非好友的类型为4，未知类型2）
             Cursor c1 = db.rawQuery("select username,alias,nickname from rcontact where verifyFlag = 0 and  type == 3", null);
             JSONArray resultSet     = new JSONArray();
@@ -261,7 +262,8 @@ public class openSQLite {
             return resultSet.toJSONString();
 
     }
-    private static String getUserName(File dbFile) throws Exception {
+
+    private static String getUserName(File dbFile) {
         String username = "";
         Context context = MyApplication.getContextObject();
         SQLiteDatabase.loadLibs(context);
